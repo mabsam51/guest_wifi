@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guest Wi‑Fi – Responsible Use</title>
+  <title>Guest Wi-Fi – Responsible Use</title>
+
   <!-- Search engine control -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
-  
+
   <!-- No translation / preview services -->
   <meta name="google" content="notranslate">
 
@@ -18,6 +19,7 @@
 
   <!-- Page purpose -->
   <meta name="description" content="Private guest Wi-Fi information page. Not intended for public indexing.">
+
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="favicon.png" type="image/png">
@@ -78,11 +80,72 @@
     .langbtn[aria-pressed="true"]{border-color: rgba(37,99,235,.45);box-shadow: 0 0 0 4px rgba(37,99,235,.12);}
     .pill{font-size:12px;font-weight:800;padding:4px 8px;border-radius:999px;background: rgba(37,99,235,.10);border:1px solid rgba(37,99,235,.18);color:#0b3aa6;letter-spacing:.02em;}
     .content{margin-top:12px;border-top:1px solid var(--border);padding-top:14px;}
+    .notice{
+      margin:0 0 12px 0;
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfdff;
+      color: var(--muted);
+      font-size:14px;
+    }
     .content h2{font-size:18px;margin:0 0 8px 0;}
     .content p{margin:0 0 10px 0;color:var(--text);font-size:16px;}
     ul{margin:10px 0 0 0;padding-left:20px;color:var(--text);font-size:16px;}
     li{ margin:6px 0; }
     .mini{margin-top:12px;padding:12px 12px;border:1px dashed var(--border);border-radius: 12px;background:#fbfdff;color: var(--muted);font-size:13px;}
+
+    /* Acceptance UI */
+    .accept {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .checkrow{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-size:15px;
+      color: var(--text);
+    }
+    .checkrow input{
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: #2563eb;
+      flex: 0 0 auto;
+    }
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .confirmbtn{
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .confirmbtn:active{ transform: scale(0.99); }
+    .confirmbtn:disabled{
+      opacity: .55;
+      cursor: not-allowed;
+    }
+    .confirmbtn:not(:disabled){
+      border-color: rgba(37,99,235,.45);
+      box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+    }
+    .smallhint{
+      font-size: 13px;
+      color: var(--muted);
+    }
   </style>
 </head>
 
@@ -94,7 +157,7 @@
 
     <div class="card">
       <div class="title">
-        <h1 id="pageTitle">Gastzugang – Hinweise zur rechtmäßigen Nutzung</h1>
+        <h1 id="pageTitle">Nutzungsbedingungen für den Gastzugang</h1>
         <p id="pageSubtitle">Bitte Sprache wählen. / Please select a language.</p>
 
         <div class="langbar" role="group" aria-label="Language selection">
@@ -110,122 +173,157 @@
   </div>
 
   <script>
-  const texts = {
-    de: {
-      title: "Nutzungsbedingungen für den Gastzugang",
-      subtitle: "Bitte Sprache wählen. / Please select a language.",
-      notice: "Hinweis: Diese Nutzungsbedingungen stehen auch in English, Italiano und Русский zur Verfügung.",
-      h2: "Nutzungsbedingungen für den Gastzugang",
-      paragraphs: [
-        "Dieser Internetzugang wird Gästen unentgeltlich und ausschließlich zur gesetzeskonformen Nutzung bereitgestellt.",
-        "Eine Nutzung zu rechtswidrigen Zwecken ist ausdrücklich untersagt. Dies umfasst insbesondere die Verletzung von Urheber- oder sonstigen Schutzrechten (z. B. illegales Streaming oder Filesharing) sowie strafbare Handlungen, insbesondere die Verbreitung strafbarer Inhalte (u. a. Hassrede/Volksverhetzung) und den Zugriff auf oder die Verbreitung kinderpornografischer oder jugendgefährdender Inhalte.",
-        "Der Nutzer handelt eigenverantwortlich und haftet für sämtliche durch ihn verursachten Rechtsverstöße. Der Anschlussinhaber übernimmt keine Haftung für Inhalte oder Handlungen des Nutzers.",
-        "Durch die Nutzung dieses Gastzugangs bestätigen Sie, diese Hinweise zur Kenntnis genommen zu haben."
-      ],
-      mini: "Hinweis: Diese Seite dient ausschließlich der Information von Gästen des privaten WLAN-Zugangs. Es werden durch diese Webseite keine personenbezogenen Daten erhoben oder ausgewertet."
-    },
-    en: {
-      title: "Terms of Use for Guest Internet Access",
-      subtitle: "Please select a language. / Bitte Sprache wählen.",
-      notice: "Notice: These terms of use are also available in Deutsch, Italiano and Русский.",
-      h2: "Terms of Use for Guest Internet Access",
-      paragraphs: [
-        "This internet access is provided to guests free of charge and may only be used in compliance with applicable laws.",
-        "Any unlawful use is strictly prohibited, including in particular the infringement of copyright or other protected rights (e.g. illegal streaming or file sharing) as well as criminal activities, especially the distribution of illegal content (including hate speech or incitement) and access to or distribution of child sexual abuse material or other content harmful to minors.",
-        "Users act on their own responsibility and are fully liable for any legal violations caused by their use. The internet connection owner assumes no liability for the user’s actions or accessed content.",
-        "By using this guest network, you confirm that you have read and understood this notice."
-      ],
-      mini: "Notice: This page is for informational purposes for guests of a private Wi-Fi network only. This website does not collect or analyze any personal data."
-    },
-    it: {
-      title: "Condizioni di utilizzo per l’accesso Internet ospiti",
-      subtitle: "Seleziona una lingua. / Bitte Sprache wählen.",
-      notice: "Avviso: Le presenti condizioni di utilizzo sono disponibili anche in Deutsch, English e Русский.",
-      h2: "Condizioni di utilizzo per l’accesso Internet ospiti",
-      paragraphs: [
-        "Questo accesso a Internet è fornito gratuitamente agli ospiti ed è consentito esclusivamente un utilizzo conforme alla legge.",
-        "È espressamente vietato qualsiasi utilizzo illecito, in particolare la violazione del diritto d’autore o di altri diritti tutelati (ad esempio streaming o file sharing illegali), nonché attività penalmente rilevanti, inclusa la diffusione di contenuti illegali (come incitamento all’odio) e l’accesso o la diffusione di materiale pedopornografico o contenuti dannosi per i minori.",
-        "L’utente agisce sotto la propria responsabilità ed è responsabile di eventuali violazioni di legge. Il titolare della connessione non assume alcuna responsabilità per le attività o i contenuti utilizzati dall’utente.",
-        "Utilizzando questa rete ospiti, l’utente conferma di aver letto e compreso queste informazioni."
-      ],
-      mini: "Avviso: Questa pagina è destinata esclusivamente a informare gli ospiti di una rete Wi-Fi privata. Questo sito web non raccoglie né analizza dati personali."
-    },
-    ru: {
-      title: "Условия использования гостевого доступа в Интернет",
-      subtitle: "Пожалуйста, выберите язык. / Bitte Sprache wählen.",
-      notice: "Уведомление: Данные условия использования также доступны на Deutsch, English и Italiano.",
-      h2: "Условия использования гостевого доступа в Интернет",
-      paragraphs: [
-        "Данный доступ в Интернет предоставляется гостям бесплатно и исключительно для законного использования.",
-        "Любое незаконное использование строго запрещено, включая, в частности, нарушение авторских или иных охраняемых прав (например, незаконный стриминг или файлообмен), а также противоправные действия, в том числе распространение незаконного контента (включая разжигание ненависти) и доступ к или распространение материалов сексуального насилия над детьми либо контента, наносящего вред несовершеннолетним.",
-        "Пользователь действует на свою ответственность и несёт полную ответственность за любые нарушения закона. Владелец интернет-подключения не несёт ответственности за действия пользователя или используемый контент.",
-        "Используя данный гостевой доступ, вы подтверждаете, что ознакомились с этими условиями."
-      ],
-	  mini: "Уведомление: Эта страница предназначена только для информирования гостей частной Wi-Fi-сети. Этот веб-сайт не собирает и не анализирует персональные данные."
-    }
-  };
+    const REDIRECT_URL = "https://duckduckgo.com/";
 
-  const contentEl = document.getElementById("content");
-  const titleEl = document.getElementById("pageTitle");
-  const subtitleEl = document.getElementById("pageSubtitle");
-  const btns = Array.from(document.querySelectorAll(".langbtn"));
+    const texts = {
+      de: {
+        title: "Nutzungsbedingungen für den Gastzugang",
+        subtitle: "Bitte Sprache wählen. / Please select a language.",
+        notice: "Hinweis: Diese Nutzungsbedingungen stehen auch in English, Italiano und Русский zur Verfügung.",
+        h2: "Nutzungsbedingungen für den Gastzugang",
+        paragraphs: [
+          "Dieser Internetzugang wird Gästen unentgeltlich und ausschließlich zur gesetzeskonformen Nutzung bereitgestellt.",
+          "Eine Nutzung zu rechtswidrigen Zwecken ist ausdrücklich untersagt. Dies umfasst insbesondere die Verletzung von Urheber- oder sonstigen Schutzrechten (z. B. illegales Streaming oder Filesharing) sowie strafbare Handlungen, insbesondere die Verbreitung strafbarer Inhalte (u. a. Hassrede/Volksverhetzung) und den Zugriff auf oder die Verbreitung kinderpornografischer oder jugendgefährdender Inhalte.",
+          "Der Nutzer handelt eigenverantwortlich und haftet für sämtliche durch ihn verursachten Rechtsverstöße. Der Anschlussinhaber übernimmt keine Haftung für Inhalte oder Handlungen des Nutzers.",
+          "Durch die Nutzung dieses Gastzugangs bestätigen Sie, diese Hinweise zur Kenntnis genommen zu haben."
+        ],
+        mini: "Hinweis: Diese Seite dient ausschließlich der Information von Gästen des privaten WLAN-Zugangs. Es werden durch diese Webseite keine personenbezogenen Daten erhoben oder ausgewertet.",
+        acceptLabel: "Ich akzeptiere die Nutzungsbedingungen und bestätige die Kenntnisnahme.",
+        confirmText: "Bestätigen",
+        hint: "Nach Bestätigung werden Sie zu DuckDuckGo weitergeleitet."
+      },
+      en: {
+        title: "Terms of Use for Guest Internet Access",
+        subtitle: "Please select a language. / Bitte Sprache wählen.",
+        notice: "Notice: These terms of use are also available in Deutsch, Italiano and Русский.",
+        h2: "Terms of Use for Guest Internet Access",
+        paragraphs: [
+          "This internet access is provided to guests free of charge and may only be used in compliance with applicable laws.",
+          "Any unlawful use is strictly prohibited, including in particular the infringement of copyright or other protected rights (e.g. illegal streaming or file sharing) as well as criminal activities, especially the distribution of illegal content (including hate speech or incitement) and access to or distribution of child sexual abuse material or other content harmful to minors.",
+          "Users act on their own responsibility and are fully liable for any legal violations caused by their use. The internet connection owner assumes no liability for the user’s actions or accessed content.",
+          "By using this guest network, you confirm that you have read and understood this notice."
+        ],
+        mini: "Notice: This page is for informational purposes for guests of a private Wi-Fi network only. This website does not collect or analyze any personal data.",
+        acceptLabel: "I accept the terms of use and confirm that I have read and understood them.",
+        confirmText: "Confirm",
+        hint: "After confirming, you will be redirected to DuckDuckGo."
+      },
+      it: {
+        title: "Condizioni di utilizzo per l’accesso Internet ospiti",
+        subtitle: "Seleziona una lingua. / Bitte Sprache wählen.",
+        notice: "Avviso: Le presenti condizioni di utilizzo sono disponibili anche in Deutsch, English e Русский.",
+        h2: "Condizioni di utilizzo per l’accesso Internet ospiti",
+        paragraphs: [
+          "Questo accesso a Internet è fornito gratuitamente agli ospiti ed è consentito esclusivamente un utilizzo conforme alla legge.",
+          "È espressamente vietato qualsiasi utilizzo illecito, in particolare la violazione del diritto d’autore o di altri diritti tutelati (ad esempio streaming o file sharing illegali), nonché attività penalmente rilevanti, inclusa la diffusione di contenuti illegali (come incitamento all’odio) e l’accesso o la diffusione di materiale pedopornografico o contenuti dannosi per i minori.",
+          "L’utente agisce sotto la propria responsabilità ed è responsabile di eventuali violazioni di legge. Il titolare della connessione non assume alcuna responsabilità per le attività o i contenuti utilizzati dall’utente.",
+          "Utilizzando questa rete ospiti, l’utente conferma di aver letto e compreso queste informazioni."
+        ],
+        mini: "Avviso: Questa pagina è destinata esclusivamente a informare gli ospiti di una rete Wi-Fi privata. Questo sito web non raccoglie né analizza dati personali.",
+        acceptLabel: "Accetto le condizioni di utilizzo e confermo di averle lette e comprese.",
+        confirmText: "Conferma",
+        hint: "Dopo la conferma verrai reindirizzato a DuckDuckGo."
+      },
+      ru: {
+        title: "Условия использования гостевого доступа в Интернет",
+        subtitle: "Пожалуйста, выберите язык. / Bitte Sprache wählen.",
+        notice: "Уведомление: Данные условия использования также доступны на Deutsch, English и Italiano.",
+        h2: "Условия использования гостевого доступа в Интернет",
+        paragraphs: [
+          "Данный доступ в Интернет предоставляется гостям бесплатно и исключительно для законного использования.",
+          "Любое незаконное использование строго запрещено, включая, в частности, нарушение авторских или иных охраняемых прав (например, незаконный стриминг или файлообмен), а также противоправные действия, в том числе распространение незаконного контента (включая разжигание ненависти) и доступ к или распространение материалов сексуального насилия над детьми либо контента, наносящего вред несовершеннолетним.",
+          "Пользователь действует на свою ответственность и несёт полную ответственность за любые нарушения закона. Владелец интернет-подключения не несёт ответственности за действия пользователя или используемый контент.",
+          "Используя данный гостевой доступ, вы подтверждаете, что ознакомились с этими условиями."
+        ],
+        mini: "Уведомление: Эта страница предназначена только для информирования гостей частной Wi-Fi-сети. Этот веб-сайт не собирает и не анализирует персональные данные.",
+        acceptLabel: "Я принимаю условия использования и подтверждаю, что ознакомился(лась) с ними.",
+        confirmText: "Подтвердить",
+        hint: "После подтверждения вы будете перенаправлены на DuckDuckGo."
+      }
+    };
 
-  function esc(s){
-    return String(s)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;");
-  }
+    const contentEl = document.getElementById("content");
+    const titleEl = document.getElementById("pageTitle");
+    const subtitleEl = document.getElementById("pageSubtitle");
+    const btns = Array.from(document.querySelectorAll(".langbtn"));
 
-  function render(lang){
-    const t = texts[lang] || texts.de;
-
-    titleEl.textContent = t.title;
-    subtitleEl.textContent = t.subtitle;
-
-    const paragraphsHtml = t.paragraphs.map(p => `<p>${esc(p)}</p>`).join("");
-
-    contentEl.innerHTML = `
-      <div class="notice">${esc(t.notice)}</div>
-      <h2>${esc(t.h2)}</h2>
-      ${paragraphsHtml}
-      <div class="mini">${esc(t.mini)}</div>
-    `;
-
-    btns.forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false"));
-    document.documentElement.lang = lang;
-  }
-
-  // ➜ NEU: Sprache aus Browsereinstellung wählen (DE/EN/IT/RU)
-  function detectPreferredLang(){
-    const supported = new Set(["de","en","it","ru"]);
-
-    // navigator.languages ist meist eine Liste (z.B. ["de-DE","en-US",...])
-    const prefs = Array.isArray(navigator.languages) && navigator.languages.length
-      ? navigator.languages
-      : [navigator.language || "de"];
-
-    for (const p of prefs) {
-      if (!p) continue;
-      const tag = String(p).toLowerCase();
-
-      // 1) exakte Treffer (z.B. "de", "ru")
-      if (supported.has(tag)) return tag;
-
-      // 2) Sprachcode vor dem "-" (z.B. "de-DE" -> "de")
-      const base = tag.split("-")[0];
-      if (supported.has(base)) return base;
+    function esc(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;");
     }
 
-    return "de"; // Fallback
-  }
+    function render(lang){
+      const t = texts[lang] || texts.de;
 
-  // Button-Clicks
-  btns.forEach(b => b.addEventListener("click", () => render(b.dataset.lang)));
+      titleEl.textContent = t.title;
+      subtitleEl.textContent = t.subtitle;
 
-  // Initial: Browser-Sprache
-  render(detectPreferredLang());
-</script>
+      const paragraphsHtml = t.paragraphs.map(p => `<p>${esc(p)}</p>`).join("");
 
+      contentEl.innerHTML = `
+        <div class="notice">${esc(t.notice)}</div>
+        <h2>${esc(t.h2)}</h2>
+        ${paragraphsHtml}
+        <div class="mini">${esc(t.mini)}</div>
+
+        <div class="accept">
+          <label class="checkrow">
+            <input id="acceptBox" type="checkbox" />
+            <span>${esc(t.acceptLabel)}</span>
+          </label>
+
+          <div class="btnrow">
+            <button id="confirmBtn" class="confirmbtn" type="button" disabled>
+              ${esc(t.confirmText)}
+            </button>
+          </div>
+
+          <div class="smallhint">${esc(t.hint)}</div>
+        </div>
+      `;
+
+      // Button states
+      btns.forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false"));
+      document.documentElement.lang = lang;
+
+      // Wire up checkbox + button (no storage)
+      const acceptBox = document.getElementById("acceptBox");
+      const confirmBtn = document.getElementById("confirmBtn");
+
+      acceptBox.addEventListener("change", () => {
+        confirmBtn.disabled = !acceptBox.checked;
+      });
+
+      confirmBtn.addEventListener("click", () => {
+        if (!acceptBox.checked) return;
+        window.location.href = REDIRECT_URL;
+      });
+    }
+
+    // Language detection based on browser preferences
+    function detectPreferredLang(){
+      const supported = new Set(["de","en","it","ru"]);
+      const prefs = (Array.isArray(navigator.languages) && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || "de"];
+
+      for (const p of prefs) {
+        if (!p) continue;
+        const tag = String(p).toLowerCase();
+        if (supported.has(tag)) return tag;
+        const base = tag.split("-")[0];
+        if (supported.has(base)) return base;
+      }
+      return "de";
+    }
+
+    // Language button clicks
+    btns.forEach(b => b.addEventListener("click", () => render(b.dataset.lang)));
+
+    // Initial render: browser language
+    render(detectPreferredLang());
+  </script>
 </body>
 </html>
